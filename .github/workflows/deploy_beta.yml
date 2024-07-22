@@ -30,12 +30,11 @@ jobs:
       - name: Upload Bot to Server
         uses: appleboy/scp-action@v0.1.7
         with:
-          debug: true
           host: ${{ secrets.SSH_HOST }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           username: ${{ secrets.SSH_USER }}
           source: './slimebot.jar'
-          target: '${{ secrets.PRODUCTION_WORK_DIR }}'
+          target: '${{ secrets.BETA_WORK_DIR }}'
           strip_components: 1
 
       - name: rebuild Dockercontainer and start Bot
@@ -44,4 +43,4 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           username: ${{ secrets.SSH_USER }}
-          script: cd ${{ secrets.PRODUCTION_WORK_DIR }} && ./rebuild.sh slimetest slimetest
+          script: cd ${{ secrets.BETA_WORK_DIR }} && ./rebuild.sh slimetest slimetest
